@@ -42,3 +42,20 @@ end
 
 p caecer_cipher_2("What a string!", 5)
 
+# Method 3
+def caecer_cipher_3(string, key)
+  string = string.split('')
+  string.map! do |char|
+    if char =~ /[a-z]/
+      char = ((char.ord) - 26).chr unless char.ord + key <= 122
+      char = (char.ord + key).chr
+    elsif char =~ /[A-Z]/
+      char = ((char.ord) - 26).chr unless char.ord + key <= 90
+      char = (char.ord+ key).chr
+    else
+      char
+    end
+  end
+  string.join
+end
+p caecer_cipher_3("What a string!", 5)
