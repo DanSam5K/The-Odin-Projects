@@ -1,5 +1,3 @@
-require 'pry-byebug'
-
 class Player
   attr_reader  :name, :mark
 
@@ -14,3 +12,4 @@ class Player
     position.map! { |ele| ele.to_i }
   end
 end
+
