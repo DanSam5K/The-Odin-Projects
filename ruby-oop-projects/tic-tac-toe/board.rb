@@ -41,7 +41,36 @@ class Board
     end
   end
 
-end
+  def win_diagonal?(mark)
+    left_to_right = (0...@grid.length).all? do |i|
+      @grid[i][i] == mark
+    end
 
-board = Board.new
-puts board.valid?([0,4])
+    right_to_left = (0...@grid.length).all? do |i|
+      @grid[i][@grid.length - 1 - i] == mark
+    end
+
+    left_to_right || right_to_left
+  end
+
+  def win?(mark)
+    self.win_row?(mark) || self.win_col?(mark) || self.win_diagonal?(mark)
+  end
+
+  def empty?(position)
+    row, col = position
+    @grid[row][col] == "_"
+  end
+
+  def legal_positions
+    positions = []
+    (0...@grid.length).each do |row|
+      (0...@grid.length).each do |col|
+        pos = [row, col]
+        positions << pos if empty?(pos)
+      end
+    end
+    positions
+  end
+
+end
