@@ -26,7 +26,7 @@ class Board
   end
 
   def print
-    @grid.each { |row| puts row.row.join("|").prepend("|") << "|" }
+    @grid.each { |row| puts row.join("|").prepend("|") << "|" }
   end
 
   def win_row?(mark)
