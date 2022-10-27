@@ -1,13 +1,12 @@
+require "csv"
+
 puts "Event Manager Initialized!"
 
 
-contents = File.read('event_attendees.csv')
-p contents[3]
+contents = CSV.open("event_attendees.csv", headers: true, header_converters: :symbol)
 
-lines = File.readlines("event_attendees.csv")
-lines.each do |line|
-  next if line == lines[0]
-  columns = line.split(",")
-  name = columns[2]
-  puts name
+contents.each do |row|
+  name = row[:first_name]
+  zipcode = row[:zipcode]
+  puts "#{name} #{zipcode}"
 end
