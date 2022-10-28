@@ -37,7 +37,7 @@ end
 
 puts "Event Manager Initialized!"
 
-template_letter = File.read("form_letter.html")
+# template_letter = File.read("form_letter.html")
 
 contents = CSV.open("event_attendees.csv", headers: true, header_converters: :symbol)
 
@@ -50,9 +50,12 @@ contents.each do |row|
 
   zipcode = clean_zipcode(row[:zipcode])
 
+  phone_number = clean_phone_number(row[:homephone])
+
   legislator_names = legislators_by_zipcode(zipcode)
   
   form_letter = erb_template.result(binding)
    
   save_thank_you_letters(id, form_letter)
+
 end
