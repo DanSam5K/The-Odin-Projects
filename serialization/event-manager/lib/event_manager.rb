@@ -48,6 +48,20 @@ def save_thank_you_letters(id, form_letter)
   end
 end
 
+def time_targeting(regdate)
+  regdate = DateTime.strptime(regdate, "%m/%d/%y %H:%M")
+  regdate.hour
+end
+
+def most_popular_hour(file_content)
+  hours = Hash.new(0)
+  file_content.each do |row|
+    # hours[row[:regdate].split(" ")[1].split(":")[0]] += 1
+    hours[time_targeting(row[:regdate])] += 1
+  end
+  hours.max_by { |k, v| v }
+end
+
 puts "Event Manager Initialized!"
 
 # template_letter = File.read("form_letter.html")
@@ -69,3 +83,5 @@ contents.each do |row|
    
   save_thank_you_letters(id, form_letter)
 end
+
+puts "Most popular hour: #{most_popular_hour(contents)[0]} o'clock with #{most_popular_hour(contents)[1]} registrations."
