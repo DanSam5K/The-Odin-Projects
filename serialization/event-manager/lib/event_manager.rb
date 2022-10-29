@@ -53,6 +53,21 @@ def time_targeting(regdate)
   regdate.hour
 end
 
+def day_targeting(regdate)
+  regdate = DateTime.strptime(regdate, "%m/%d/%y %H:%M")
+  regdate.wday
+end
+
+def most_popular_day(file_content)
+  days = Hash.new(0)
+  file_content.each do |row|
+    # hours[row[:regdate].split(" ")[1].split(":")[0]] += 1
+    days[day_targeting(row[:regdate])] += 1
+  end
+  days.max_by { |k, v| v }
+end
+
+
 def most_popular_hour(file_content)
   hours = Hash.new(0)
   file_content.each do |row|
@@ -85,3 +100,5 @@ contents.each do |row|
 end
 
 puts "Most popular hour: #{most_popular_hour(contents)[0]} o'clock with #{most_popular_hour(contents)[1]} registrations."
+
+puts "Most popular day: #{most_popular_day(contents)[0]} with #{most_popular_day(contents)[1]} registrations."
