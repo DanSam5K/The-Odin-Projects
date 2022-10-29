@@ -2,6 +2,10 @@ require "csv"
 require "google/apis/civicinfo_v2"
 require "erb"
 
+def contents
+  CSV.open("event_attendees.csv", headers: true, header_converters: :symbol)
+end
+
 
 def clean_zipcode(zipcode)
   zipcode.to_s.rjust(5, "0")[0..4]
@@ -17,7 +21,6 @@ def clean_phone_number(phone_number)
     "0000000000"
   end
 end
-
 
 def legislators_by_zipcode(zipcode)
   civic_info = Google::Apis::CivicinfoV2::CivicInfoService.new
@@ -48,8 +51,6 @@ end
 puts "Event Manager Initialized!"
 
 # template_letter = File.read("form_letter.html")
-
-contents = CSV.open("event_attendees.csv", headers: true, header_converters: :symbol)
 
 template_letter = File.read("form_letter.erb")
 erb_template = ERB.new template_letter
