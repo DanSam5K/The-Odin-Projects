@@ -19,5 +19,27 @@ module GameLogic
     exact_match
   end
 
-  
+  def near_match(master, guess)
+    near = 0
+    guess.each_index do |index|
+      next unless guess[index] != nil && master.include?(guess[index])
+
+      near += 1
+      remove = master.find_index(guess[index])
+      master[remove] = "?"
+      guess[index] = "?"
+    end
+    near
+  end
+
+  def solved?(master, guess)
+    master == guess
+  end
+
+  def  repeat_game
+    puts game_message('repeat_prompt')
+    replay = gets.chomp
+    puts game_message('thanks') if replay.downcase != 'y'
+    Game.new.play if replay.downcase == 'y'
+  end 
 end
