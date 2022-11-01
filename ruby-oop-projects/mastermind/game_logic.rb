@@ -1,45 +1,29 @@
-module GameLogic
-  def compare(master, guess)
-    temp_master = master.clone
-    temp_guess = guess.clone
-    @exact_number = exact_match(temp_master, temp_guess)
-    @near_number = near_match(tem_master, tem_guess)
-    @total_number = exact_number + near_number
-  end
+module Rules
+  COLOURS = %w[red blue green yellow orange purple].freeze
+  GUESS_SPACE = [' ', ' ', ' ', ' '].freeze
+  HINT_SPACE = [' ', ' ', ' ', ' '].freeze
+  GAMEBOARD = [[GUESS_SPACE], [HINT_SPACE]]freeze
 
-  def exact_match(master, guess)
-    exact_match = 0
-    master.each_with_index do |color, index|
-      if color == guess[index]
-        exact_match += 1
-        master[index] = nil
-        guess[index] = nil
-      end
+  # def legal_guess?(guess)
+  #   guess.length == 4 && guess.all? { |colour| COLOURS.include?(colour) }
+  # end
+
+  def legal_guess?(guess)
+    if guess.length != 4
+      puts 'Your guess must be 4 colours long'
+      return false
+    elsif guess.any? { |colour| !COLOURS.include?(colour) }
+      puts 'Your guess must be a valid colour'
+      return false
+    else
+      return true
     end
-    exact_match
   end
+end
 
-  def near_match(master, guess)
-    near = 0
-    guess.each_index do |index|
-      next unless guess[index] != nil && master.include?(guess[index])
-
-      near += 1
-      remove = master.find_index(guess[index])
-      master[remove] = "?"
-      guess[index] = "?"
-    end
-    near
+module Swaszek
+  def read_guess(guess)
+    perfects = board.gameboard[1][turn - 2][0].length if turn > 1
+    exits = board.gameboard[1][turn - 2][1].length if turn > 1
   end
-
-  def solved?(master, guess)
-    master == guess
-  end
-
-  def  repeat_game
-    puts game_message('repeat_prompt')
-    replay = gets.chomp
-    puts game_message('thanks') if replay.downcase != 'y'
-    Game.new.play if replay.downcase == 'y'
-  end 
 end
