@@ -12,7 +12,7 @@ class Hangman
   end
 
   def download_google_words
-    url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
+    url = "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt"
 
     words_file = URI.open(url).read
     words_file_array = words_file.split("\n")
@@ -64,17 +64,17 @@ class Hangman
         puts make_guess
       end
     else
-      puts "Game over!... better luck next time"
+      puts "Game over!... better luck next time the word was : ----#{@word}---"
     end
   end
 
 
   def begin
-    puts "New game started... your clue is: #{ @word.size } letters long"
+    puts "New game started..."
     puts "To exit the game at any time, type 'exit'"
     print_teaser
 
-    puts "your clue is: #{ @word[0] }"
+    puts "your clue is: first letter #{ @word[0] } : middle letter #{ @word[@word.size/2] } : last letter #{@word[@word.size-1]}   and is #{@word.size} letters long"
     make_guess
   end
 
