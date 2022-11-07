@@ -1,29 +1,35 @@
-module Rules
-  COLOURS = %w[red blue green yellow orange purple].freeze
-  GUESS_SPACE = [' ', ' ', ' ', ' '].freeze
-  HINT_SPACE = [' ', ' ', ' ', ' '].freeze
-  GAMEBOARD = [[GUESS_SPACE], [HINT_SPACE]]freeze
-
-  # def legal_guess?(guess)
-  #   guess.length == 4 && guess.all? { |colour| COLOURS.include?(colour) }
-  # end
-
-  def legal_guess?(guess)
-    if guess.length != 4
-      puts 'Your guess must be 4 colours long'
-      return false
-    elsif guess.any? { |colour| !COLOURS.include?(colour) }
-      puts 'Your guess must be a valid colour'
-      return false
-    else
-      return true
-    end
+def randomize(array)
+  4.times do
+    array.push(rand(1..6))
   end
 end
 
-module Swaszek
-  def read_guess(guess)
-    perfects = board.gameboard[1][turn - 2][0].length if turn > 1
-    exits = board.gameboard[1][turn - 2][1].length if turn > 1
+class String
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def yellow
+    colorize(33)
+  end
+
+  def blue
+    colorize(34)
+  end
+
+  def pink
+    colorize(35)
+  end
+
+  def light_blue
+    colorize(36)
   end
 end
