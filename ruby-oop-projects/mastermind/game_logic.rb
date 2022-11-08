@@ -33,3 +33,18 @@ class String
     colorize(36)
   end
 end
+
+class Guesser
+  attr_reader :gameover
+  def initialize(guesses, guess_length)
+    @guesses = guesses
+    @guess_length = guess_length
+    @current_guess = []
+    @correct_guess = Array.new(guess_length)
+    @gameover = false
+    @num_correct = 0
+    @num_almost_correct = 0
+  end
+
+  def set_guess
+    puts "\nGuess the code. You have #{@guesses} guesses." 
