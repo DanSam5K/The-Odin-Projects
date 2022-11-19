@@ -49,4 +49,33 @@ end
 
 puts palindrome("I")
 
+def print_bottles(n)
+  if n == 0
+    puts "No more bottles of beer on the wall"
+  else
+    puts "#{n} bottles of beer on the wall"
+    print_bottles(n-1)
+  end
+end
+
+print_bottles(10)
+
+def fibonnaci(n)
+  if n < 2
+    n
+  else
+    fibonnaci(n-1) + fibonnaci(n-2)
+  end
+end
+
+puts fibonnaci(10)
+
+def factorial(n)
+  if n == 0
+    1
+  else
+    n * factorial(n-1)
+  end
+end
+
 
