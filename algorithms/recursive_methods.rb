@@ -79,3 +79,33 @@ def factorial(n)
 end
 
 
+puts factorial(5)
+
+def flatten_arr(arr)
+  if arr.length == 1
+    arr[0]
+  else
+    arr[0] + flatten_arr(arr[1..-1])
+  end
+end
+
+puts flatten_arr([5,6,7,8,9,10])
+
+def flatten(arr, result = [])
+  if arr.length == 1
+    result << arr[0]
+  else
+    if arr[0].is_a?(Array)
+      flatten(arr[0], result)
+    else
+      result << arr[0]
+    end
+    flatten(arr[1..-1], result)
+  end
+  result
+end
+
+puts flatten([5, [1,2,3,[4,5]],7, [8,9,10]]).join(', ')
+
+def convert_int_to_roman(roman, result="")
+  
