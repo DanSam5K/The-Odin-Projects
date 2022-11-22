@@ -11,11 +11,11 @@
 #   break if f > 8
 # end
 
-def fibs(n)
+def fibs_rec(n)
   if n < 2
     n
   else
-    fibs(n-1) + fibs(n-2)
+    fibs_rec(n-1) + fibs_rec(n-2)
   end
 end
 
