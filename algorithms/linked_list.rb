@@ -52,6 +52,24 @@ class LinkedList
     current.value if current
   end
 
+  def pop
+    current = @head
+    while current.next != @tail
+      current = current.next
+    end
+    current.next = nil
+    @tail = current
+  end
+
+  def contains?(value)
+    current = @head
+    while current
+      return true if current.value == value
+      current = current.next
+    end
+    false
+  end
+
   
 
 
