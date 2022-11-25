@@ -12,10 +12,33 @@ class LinkedList
       @head = node
       @tail = node
     else
-      @tail.next_node = node
+      @tail.next = node
       @tail = node
     end
   end
+
+  def prepend(value)
+    node = Node.new(value)
+    if @head.nil?
+      @head = node
+      @tail = node
+    else
+      node.next = @head
+      @head = node
+    end
+  end
+
+  def size
+    count = 0
+    current = @head
+    while current
+      count += 1
+      current = current.next
+    end
+    count
+  end
+
+  
 
 
 end
@@ -31,5 +54,12 @@ end
 
 list = LinkedList.new
 list.append(5)
+list.append(6)
+list.prepend(6)
+list.prepend(7)
+list.prepend(8)
 
-p list
+p list.tail.value
+p list.head.value
+
+p list.size
