@@ -70,8 +70,26 @@ class LinkedList
     false
   end
 
-  
+  def find(value)
+    current = @head
+    index = 0
+    while current
+      return index if current.value == value
+      current = current.next
+      index += 1
+    end
+    nil
+  end
 
+  def to_s
+    current = @head
+    string = ""
+    while current
+      string += "( #{current.value} ) -> "
+      current = current.next
+    end
+    string += "nil"
+  end
 
 end
 
