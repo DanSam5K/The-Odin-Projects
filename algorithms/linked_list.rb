@@ -91,6 +91,24 @@ class LinkedList
     string += "nil"
   end
 
+  def insert_at(value, index)
+    current = @head
+    index.times do
+      current = current.next
+    end
+    node = Node.new(value)
+    node.next = current.next
+    current.next = node
+  end
+
+  def remove_at(index)
+    current = @head
+    (index - 1).times do
+      current = current.next
+    end
+    current.next = current.next.next
+  end
+
 end
 
 class Node
