@@ -1,6 +1,4 @@
 class LinkedList
-  attr_accessor :head, :tail
-
   def initialize
     @head = nil
     @tail = nil
@@ -38,6 +36,22 @@ class LinkedList
     count
   end
 
+  def head
+    @head.value
+  end
+
+  def tail
+    @tail.value
+  end
+
+  def at(index)
+    current = @head
+    index.times do
+      current = current.next
+    end
+    current.value if current
+  end
+
   
 
 
@@ -45,7 +59,6 @@ end
 
 class Node
   attr_accessor :value, :next
-
   def initialize(value = nil, next_node = nil)
     @value = value
     @next = next_node
@@ -54,12 +67,17 @@ end
 
 list = LinkedList.new
 list.append(5)
-list.append(6)
-list.prepend(6)
-list.prepend(7)
 list.prepend(8)
 
-p list.tail.value
-p list.head.value
+list.append(10)
+list.append(15)
+list.append(20)
+list.append(25)
 
-p list.size
+p list.insert_at(12, 2).to_s
+p list.remove_at(3).to_s
+
+p list.at(1)
+
+
+p list.to_s
