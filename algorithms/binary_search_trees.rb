@@ -146,4 +146,20 @@ class Tree
     balanced?(node.left) && balanced?(node.right)
   end
 
+  def rebalance
+    @root = build_tree(level_order)
+  end
+
+  def min_value(node)
+    current = node
+    current = current.left until current.left.nil?
+    current
+  end
+
+  def delete_min(node)
+    return node.right if node.left.nil?
+
+    node.left = delete_min(node.left)
+    node
+  end
 end
