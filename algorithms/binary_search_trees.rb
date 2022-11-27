@@ -118,9 +118,32 @@ class Tree
     result
   end
 
+  def height(node = root)
+    return -1 if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+    left_height > right_height ? left_height + 1 : right_height + 1
+  end
+
+  def depth(node, current = root, level = 0)
+    return level if node == current
+
+    if node.value < current.value
+      depth(node, current.left, level + 1)
+    else
+      depth(node, current.right, level + 1)
+    end
+  end
+
+  def balanced?(node = root)
+    return true if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+    return false if (left_height - right_height).abs > 1
+
+    balanced?(node.left) && balanced?(node.right)
+  end
+
 end
-
-tree = Tree.new([1, 7, 4, 23, 8, 9, 3, 5, 6, 2, 1, 7, 4, 23, 8, 9, 3, 5, 6, 2])
-p tree.build_tree([1, 7, 4, 23, 8, 9, 3, 5, 6, 2, 1, 7, 4, 23, 8, 9, 3, 5, 6, 2])
-
-tree.pretty_print
