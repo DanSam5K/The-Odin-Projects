@@ -74,6 +74,50 @@ class Tree
     end
   end
 
+  def level_order(node = root)
+    return nil if node.nil?
+
+    queue = [node]
+    result = []
+    while queue.length.positive?
+      current = queue.shift
+      result << current.value
+      queue << current.left unless current.left.nil?
+      queue << current.right unless current.right.nil?
+    end
+    result
+  end
+
+  def inorder(node = root, result = [])
+    return result if node.nil?
+
+    inorder(node.left, result)
+    result << node.value
+    inorder(node.right, result)
+
+    result
+  end
+
+  def preorder(node = root, result = [])
+    return result if node.nil?
+
+    result << node.value
+    preorder(node.left, result)
+    preorder(node.right, result)
+
+    result
+  end
+
+  def postorder(node = root, result = [])
+    return result if node.nil?
+
+    postorder(node.left, result)
+    postorder(node.right, result)
+    result << node.value
+
+    result
+  end
+
 end
 
 tree = Tree.new([1, 7, 4, 23, 8, 9, 3, 5, 6, 2, 1, 7, 4, 23, 8, 9, 3, 5, 6, 2])
