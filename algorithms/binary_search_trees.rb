@@ -64,6 +64,16 @@ class Tree
     node
   end
 
+  def find(value, node = root)
+    return node if node.nil? || node.value == value
+
+    if value < node.value
+      find(value, node.left)
+    else
+      find(value, node.right)
+    end
+  end
+
 end
 
 tree = Tree.new([1, 7, 4, 23, 8, 9, 3, 5, 6, 2, 1, 7, 4, 23, 8, 9, 3, 5, 6, 2])
