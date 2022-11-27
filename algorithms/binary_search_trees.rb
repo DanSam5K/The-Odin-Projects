@@ -34,6 +34,36 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? ' ' : '│ '}", true) if node.left
   end
 
+  def insert(value, node = root)
+    return Node.new(value) if node.nil?
+
+    if value < node.value
+      node.left = insert(value, node.left)
+    elsif value > node.value
+      node.right = insert(value, node.right)
+    end
+    node
+  end
+
+  def delete(value, node = root)
+    return node if node.nil?
+
+    if value < node.value
+      node.left = delete(value, node.left)
+    elsif value > node.value
+      node.right = delete(value, node.right)
+    else
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      temp = node
+      node = min_value(temp.right)
+      node.right = delete_min(temp.right)
+      node.left = temp.left
+    end
+    node
+  end
+
 end
 
 tree = Tree.new([1, 7, 4, 23, 8, 9, 3, 5, 6, 2, 1, 7, 4, 23, 8, 9, 3, 5, 6, 2])
