@@ -1,4 +1,8 @@
 class Calculator
+  def basic_arithmetic(a, b)
+    a.to_s + b.to_s
+  end
+
   def add(a, b, *args)
     a + b + args.sum
   end

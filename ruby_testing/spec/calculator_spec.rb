@@ -2,6 +2,13 @@ require './lib/calculator'
 
 
 describe Calculator do
+
+  describe ".basic_arithmetic" do
+    it "adds two strings" do
+      expect(subject.basic_arithmetic("a", "b")).to eq("ab")
+    end
+  end
+
   describe "#add" do
     it "returns the sum of two numbers" do
       expect(subject.add(5, 2)).to eq(7)
