@@ -21,5 +21,19 @@ describe Calculator do
     end
   end
 
+  describe "#multiply" do
+    it "returns the product of two numbers" do
+      calculator = Calculator.new
+      expect(calculator.multiply(5, 2)).to eq(10)
+    end
+  end
+
+  describe "#divide" do
+    it "returns the quotient of two numbers" do
+      calculator = Calculator.new
+      expect(calculator.divide(6, 2)).to eq(3)
+    end
+  end
+
 
 end
