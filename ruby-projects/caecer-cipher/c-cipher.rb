@@ -1,5 +1,7 @@
 # Method class implementation method
 class CaecerCipher
+  attr_reader :alphabet, :alphabet_2
+
   def initialize
       @alphabet = ('a'..'z').to_a
       @alphabet_2 = ('A'..'Z').to_a
@@ -7,12 +9,12 @@ class CaecerCipher
 
   def encode(string, key)
       string.chars.map do |char|
-          if @alphabet.include?(char)
-              index = @alphabet.index(char)
-              @alphabet[(index + key) % @alphabet.size]
-          elsif @alphabet_2.include?(char)
-              index = @alphabet_2.index(char)
-              @alphabet_2[(index + key) % @alphabet_2.size]
+          if alphabet.include?(char)
+              index = alphabet.index(char)
+              alphabet[(index + key) % alphabet.size]
+          elsif alphabet_2.include?(char)
+              index = alphabet_2.index(char)
+              alphabet_2[(index + key) % alphabet_2.size]
           else
               char
           end
