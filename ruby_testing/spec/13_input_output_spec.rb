@@ -81,8 +81,10 @@ describe NumberGame do
     # Create a new instance of NumberGame and write a test for when the @guess
     # does not equal @solution.
     context 'when user guess is not correct' do
+      subject(:game_end) {described_class.new(5, '6')}
       # remove the 'x' before running this test
-      xit 'is not game over' do
+      it 'is not game over' do
+        expect(game_end).not_to be_game_over
       end
     end
   end
@@ -103,6 +105,12 @@ describe NumberGame do
         user_input = '3'
         verified_input = game_check.verify_input(user_input)
         expect(verified_input).to eq('3')
+      end
+
+      it 'returns valid input as an integer' do
+        user_input = '3'
+        verified_input = game_check.verify_input(user_input)
+        expect(verified_input).not_to be_an(Integer)
       end
     end
 
