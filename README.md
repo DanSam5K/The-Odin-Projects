@@ -1,1 +1,2 @@
-# The-Odin-Projects
+# The Odin Projects
+solutions 
